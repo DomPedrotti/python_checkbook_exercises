@@ -27,7 +27,7 @@ while True:
 
     #displays current balance and doesn't move on till user presses the enter button
     if action == '1':
-        print(f"\nYour balance is ${check_balance()}")
+        print(f"\nYour balance is ${check_balance(username)}")
         input("press <ENTER> to continue")
 
     #makes transaction using sql insert into uers's transaction table
@@ -41,10 +41,10 @@ while True:
             amount = input("\nHow Much Would You Like to Withdrawal? ")
             amount = check_value(amount)
             amount = float(amount) * -1
-            Category = 'Withdrawal'
+            category = 'Withdrawal'
         description = add_description()
-        time = time()
-        update_sql_table(time, amount, category, description, username)
+        timestamp = time()
+        update_sql_table(timestamp, float(amount), category, description, username)
 
     #Provides user option to see all historical transactions or choose to filter results
     elif action == '4':

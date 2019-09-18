@@ -83,9 +83,10 @@ def create_account():
     does not log user in
     '''
     existing_users = select_usernames()
+    print(existing_users)
 
     username = input('New Username: ')
-    while username in existing_users or username:
+    while username in existing_users:
         username = input("ERROR: user profile already exists please enter new username\n to quit, please enter 'quit'\nNew Username: ")
         if username.lower().strip() == 'quit':
             return

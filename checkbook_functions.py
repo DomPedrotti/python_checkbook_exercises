@@ -10,7 +10,7 @@ def CSV_check_balance():
             balance += float(row[0])
     return balance
 
-def check_balance():
+def check_balance(user):
     '''
     select all transaction values from user transactions table and returns sum of those values
     works with sql commands
@@ -20,7 +20,7 @@ def check_balance():
     c = conn.cursor()
 
     rows = []
-    for row in c.execute('SELECT amount FROM dom'):
+    for row in c.execute('SELECT amount FROM '+ user):
         rows.append(row[0])
     return sum(rows)
 
@@ -63,8 +63,8 @@ def print_table(raw_table):
 
     row height will increase if description length > 30 characters
     '''
-    print ('*------------------------------------------------------------------------*' +
-           '|Date          |Amount    |Category       |Description                   |' +
+    print ('*------------------------------------------------------------------------*\n' +
+           '|Date          |Amount    |Category       |Description                   |\n' +
            '*------------------------------------------------------------------------*')
     for i in raw_table:
         date_col = '|' + date_from_timestamp(float(i[0])) + '|'
@@ -211,8 +211,8 @@ def search_by_keyword():
 
 def timestamp_from_date(date):
     '''
-    receives a date in mm:dd:yy format and returns the timestamp of that date
-    '''
+    receives a date in mm:dd:yyyy format and returns the timestamp of that date
+    '''     
     import time
     from datetime import datetime
     timestamp = datetime(int(date[-4:]), int(date[:2]), int(date[3:5]), 0, 0).timestamp()
@@ -281,3 +281,16 @@ def check_valid_number(value):
             value = input('Please Enter a Valid, Positive Number ')
             continue
     return value
+
+def check_date(date):
+    while True:
+        try: 
+            int(date.replace('/', ''))
+            if len(date) == 10:
+                break
+            else:
+                int('a')
+        except(ValueError):
+            date = input("Please Enter Valid Date of format (mm/dd/yyyy): ")
+    return date
+check_date('12/13/201b')

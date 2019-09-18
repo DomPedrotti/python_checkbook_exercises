@@ -1,4 +1,4 @@
-from checkbook_functions import timestamp_from_date, pick_one
+from checkbook_functions import timestamp_from_date, pick_one, check_date
 
 
 def update_sql_table(time, amount, category, description, username):
@@ -70,7 +70,9 @@ def search_by_date(user):
     Refines transaction table select to dates within 12:00:00am on startdate and 11:59:59pm on end date
     '''
     start_date = input("Enter Start Date (MM/DD/YYYY) ")
+    start_date =check_date(start_date)
     end_date = input("Enter End Date (MM/DD/YYYY) ")
+    end_date = check_date(end_date)
     date_range = (timestamp_from_date(start_date), timestamp_from_date(end_date) + 86400)
     import sqlite3
     conn = sqlite3.connect('checkbook.db')
@@ -117,7 +119,7 @@ def search_by_keyword(user):
     c = conn.cursor()
 
     table = []
-    for row in c.execute("SELECT * FROM dom WHERE description LIKE '%" +keyword+"%'"):
+    for row in c.execute("SELECT * FROM "+ user +" WHERE description LIKE '%" +keyword+"%'"):
         table.append(row)
     conn.close()
     return table
