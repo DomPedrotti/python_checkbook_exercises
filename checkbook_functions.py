@@ -293,4 +293,3 @@ def check_date(date):
         except(ValueError):
             date = input("Please Enter Valid Date of format (mm/dd/yyyy): ")
     return date
-check_date('12/13/201b')
