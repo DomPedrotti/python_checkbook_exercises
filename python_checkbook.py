@@ -4,13 +4,12 @@ from checkbook_functions import check_balance, add_description, print_table, che
 from time import time
 from pick import pick 
 print("\n\n ~~~~ Welcome to your Terminal Checkbook! ~~~~\n")
-#username = log_on()
-username = 'dude'
 #prompt username and open associated table
-### username = check_username()
+
+username = log_on()
+#username = 'dude'
 
 #Print welcome message and show options for input selection
-
 while True:
     #if log_on returne no username, quit program
     if username == None:
